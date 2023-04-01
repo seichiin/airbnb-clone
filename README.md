@@ -13,7 +13,7 @@ git clone https://github.com/AntonioErdeljac/next13-airbnb-clone.git
 ### Install packages
 
 ```shell
-npm i
+yarn install
 ```
 
 ### Setup .env file
