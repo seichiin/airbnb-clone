@@ -26,8 +26,6 @@ export default async function getListingById(params: IParams) {
       return null;
     }
 
-    console.log(listing, "hoho");
-
     return {
       ...listing,
       createdAt: listing.createdAt.toString(),
