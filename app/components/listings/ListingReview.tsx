@@ -61,9 +61,9 @@ const ListingReview = ({ reviews, listingId }: ListingReviewProps) => {
           <span className="font-semidbold text-xl">{totalRate + "  ·  " + reviews.length + " reviews"}</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-12 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-12 mb-8">
           {reviews.map((review) => (
-            <div key={review.id}>
+            <div key={review.id} className="border-b border-b-[#f4f4f4] pb-4">
               <div className="flex gap-3 items-center mb-4">
                 <div>
                   <Avatar src={review.user.image} />
