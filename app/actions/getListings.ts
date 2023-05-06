@@ -1,5 +1,12 @@
 import prisma from "@/app/libs/prismadb";
 
+export interface IListingReview {
+  rate?: number;
+  content?: string;
+  userId?: string;
+  listingId?: string;
+}
+
 export interface IListingsParams {
   userId?: string;
   guestCount?: number;

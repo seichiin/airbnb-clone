@@ -43,7 +43,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     <div className="relative">
       {isOpen &&
         ReactDOM.createPortal(
-          <div className="absolute top-0 left-0 w-[100vw] h-[100vh] z-1000" onClick={() => setIsOpen(false)} />,
+          <div className="fixed top-0 left-0 w-[100vw] h-[100vh] z-1000" onClick={() => setIsOpen(false)} />,
           document.body
         )}
       <div className="flex flex-row items-center gap-3">
