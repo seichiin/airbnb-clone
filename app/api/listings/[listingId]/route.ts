@@ -7,10 +7,7 @@ interface IParams {
   listingId?: string;
 }
 
-export async function DELETE(
-  request: Request, 
-  { params }: { params: IParams }
-) {
+export async function DELETE(request: Request, { params }: { params: IParams }) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
@@ -19,15 +16,47 @@ export async function DELETE(
 
   const { listingId } = params;
 
-  if (!listingId || typeof listingId !== 'string') {
-    throw new Error('Invalid ID');
+  if (!listingId || typeof listingId !== "string") {
+    throw new Error("Invalid ID");
   }
 
   const listing = await prisma.listing.deleteMany({
     where: {
       id: listingId,
-      userId: currentUser.id
-    }
+      userId: currentUser.id,
+    },
+  });
+
+  return NextResponse.json(listing);
+}
+
+export async function PUT(request: Request, { params }: { params: IParams }) {
+  const { listingId } = params;
+
+  const body = await request.json();
+  const { category, location, guestCount, roomCount, bathroomCount, imageSrc, otherImages, price, title, description } =
+    body;
+
+  if (!listingId) {
+    throw new Error("Invalid ID");
+  }
+
+  const listing = await prisma.listing.update({
+    where: {
+      id: listingId,
+    },
+    data: {
+      category,
+      locationValue: location?.value ?? undefined,
+      guestCount,
+      roomCount,
+      bathroomCount,
+      imageSrc,
+      otherImages,
+      price: price ? parseInt(price, 10) : undefined,
+      title,
+      description,
+    },
   });
 
   return NextResponse.json(listing);

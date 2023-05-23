@@ -11,7 +11,8 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json();
-  const { title, description, imageSrc, category, roomCount, bathroomCount, guestCount, location, price } = body;
+  const { title, description, imageSrc, otherImages, category, roomCount, bathroomCount, guestCount, location, price } =
+    body;
 
   Object.keys(body).forEach((value: any) => {
     if (!body[value]) {
@@ -24,6 +25,7 @@ export async function POST(request: Request) {
       title,
       description,
       imageSrc,
+      otherImages,
       category,
       roomCount,
       bathroomCount,
