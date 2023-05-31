@@ -37,6 +37,16 @@ const ListingHead: React.FC<ListingHeadProps> = ({ title, locationValue, imageSr
     <>
       <Heading title={title} subtitle={`${location?.region}, ${location?.label}`} />
       <div className="relative">
+        <div
+          className="
+            absolute
+            top-5
+            right-5
+            z-1
+          "
+        >
+          <HeartButton listingId={id} currentUser={currentUser} />
+        </div>
         <Slider {...settings}>
           {images.map((image, index) => (
             <div

@@ -59,7 +59,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, onRemove, value }) 
             <div className="font-semibold text-lg">Click to upload</div>
             {value && (
               <div
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  open?.();
+                }}
                 className="
               absolute inset-0 w-full h-full"
               >
