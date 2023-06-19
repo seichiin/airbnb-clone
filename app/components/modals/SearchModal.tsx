@@ -37,7 +37,7 @@ const SearchModal = () => {
     endDate: new Date(),
     key: "selection",
   });
-  const [disabled, setDisabled] = useState(false);
+  // const [disabled, setDisabled] = useState(false);
 
   const Map = useMemo(
     () =>
@@ -47,12 +47,12 @@ const SearchModal = () => {
     [location]
   );
 
-  useLayoutEffect(() => {
-    if (step === STEPS.LOCATION && !location) {
-      return setDisabled(true);
-    }
-    setDisabled(false);
-  }, [location, step]);
+  // useLayoutEffect(() => {
+  //   if (step === STEPS.LOCATION && !location) {
+  //     return setDisabled(true);
+  //   }
+  //   setDisabled(false);
+  // }, [location, step]);
 
   const onBack = useCallback(() => {
     setStep((value) => value - 1);
@@ -168,7 +168,7 @@ const SearchModal = () => {
 
   return (
     <Modal
-      disabled={disabled}
+      // disabled={disabled}
       isOpen={searchModal.isOpen}
       title="Filters"
       actionLabel={actionLabel}

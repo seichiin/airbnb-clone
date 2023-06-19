@@ -75,6 +75,9 @@ export default async function getListings(params: IListingsParams) {
 
     const listings = await prisma.listing.findMany({
       where: query,
+      include: {
+        review: true,
+      },
       orderBy: {
         createdAt: "desc",
       },

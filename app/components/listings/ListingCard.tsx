@@ -12,9 +12,10 @@ import HeartButton from "../HeartButton";
 import Button from "../Button";
 import Avatar from "@/app/components/Avatar";
 import { User } from "@prisma/client";
+import { AiFillStar } from "react-icons/ai";
 
 interface ListingCardProps {
-  data: SafeListing;
+  data: SafeListing & { review?: any };
   reservation?: SafeReservation;
   onAction?: (id: string) => void;
   onEdit?: (listing: SafeListing) => void;
@@ -73,6 +74,9 @@ const ListingCard: React.FC<ListingCardProps> = ({
     return `${format(start, "PP")} - ${format(end, "PP")}`;
   }, [reservation]);
 
+  const reviews = data?.review;
+  const totalRate = reviews ? reviews.reduce((acc: number, review: any) => acc + review.rate / reviews.length, 0) : 0;
+
   return (
     <div onClick={() => router.push(`/listings/${data.id}`)} className="col-span-1 cursor-pointer group">
       <div className="flex flex-col gap-2 w-full">
@@ -107,7 +111,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
             <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
         </div>
-        <div className="font-semibold text-lg">
+        <div className="font-semibold text-lg line-clamp-2">
           {location?.region}, {location?.label}
         </div>
         <div className="font-light text-neutral-500">{reservationDate || data.category}</div>
@@ -129,6 +133,14 @@ const ListingCard: React.FC<ListingCardProps> = ({
               <span>{byUser.phoneNumber ?? "--"}</span>
             </div>
           </>
+        )}
+        {!!reviews?.length && (
+          <div className="flex gap-2 items-center">
+            <span>
+              <AiFillStar size={18} />
+            </span>
+            {`${totalRate.toFixed(2)} / ${reviews.length} reviews`}
+          </div>
         )}
         {onAction && actionLabel && <Button disabled={disabled} small label={actionLabel} onClick={handleCancel} />}
         {onEdit && (
